@@ -1,0 +1,18 @@
+import boto3
+
+# specify your S3 bucket and file key
+s3_bucket = 'your-s3-bucket-name'
+file_key = 'path/to/your/file'
+
+# create a boto3 client for S3
+s3_client = boto3.client('s3')
+
+# use the S3 client to download the file to a temporary location
+with open('/tmp/myfile.txt', 'wb') as f:
+    s3_client.download_fileobj(s3_bucket, file_key, f)
+
+# process the file as needed
+with open('/tmp/myfile.txt', 'r') as f:
+    for line in f:
+        print(line.strip())
+
